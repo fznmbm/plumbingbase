@@ -1,0 +1,12 @@
+{
+  "name": "plumbingbase-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PlumbingBase — plumbers in Crawley. Static site + Vercel booking function.",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && npx vercel dev"
+  },
+  "engines": { "node": ">=18" }
+}
