@@ -41,7 +41,7 @@ export const SITE = {
   instagramUrl: "",
 
   // Cloudflare Turnstile public site key — leave '' to disable the widget
-  turnstileSiteKey: "",
+  turnstileSiteKey: "0x4AAAAAAGK37Q3ppS1_c7S2",
 
   // Add genuine customer reviews here (shown on home page when present)
 
