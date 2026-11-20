@@ -1,29 +1,29 @@
-import { SITE } from '../site.config.mjs';
-import { SERVICES } from '../content/services.mjs';
-import { icon, waIcon } from './layout.mjs';
+import { SITE } from "../site.config.mjs";
+import { SERVICES } from "../content/services.mjs";
+import { icon, waIcon } from "./layout.mjs";
 
-const serviceOptions = (selected = '') =>
-  [...SERVICES.map((s) => s.name), 'Other / not sure']
-    .map((n) => `<option${n === selected ? ' selected' : ''}>${n}</option>`)
-    .join('');
+const serviceOptions = (selected = "") =>
+  [...SERVICES.map((s) => s.name), "Other / not sure"]
+    .map((n) => `<option${n === selected ? " selected" : ""}>${n}</option>`)
+    .join("");
 
 const honeypot = `<div class="hp" aria-hidden="true"><label>Company website<input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></div>`;
 const turnstile = SITE.turnstileSiteKey
   ? `<div class="cf-turnstile" data-sitekey="${SITE.turnstileSiteKey}" data-theme="light"></div>`
-  : '';
+  : "";
 const consent = (id) => `
 <label class="check" for="${id}">
   <input type="checkbox" id="${id}" name="consent" value="yes" required>
   <span>I agree to PlumbingBase using these details to respond to my enquiry, as set out in the <a href="/privacy" target="_blank">privacy policy</a>.</span>
 </label>`;
 
-export function bookingForm(preselect = '') {
+export function bookingForm(preselect = "") {
   return `
 <form class="form card" data-form="booking" novalidate>
   <input type="hidden" name="form" value="booking">
   <div class="form-head">
-    <h2>Book a plumber</h2>
-    <p>Fill in the details below and we'll confirm your appointment by phone, WhatsApp or email.</p>
+    <h2>Book a plumber or get a free quote</h2>
+    <p>Tell us about the job and we'll come back to you with a free quote and an appointment time. No call-out charge.</p>
   </div>
 
   <fieldset>
@@ -48,51 +48,55 @@ export function bookingForm(preselect = '') {
           <option>Emergency — as soon as possible</option>
           <option>Within the next few days</option>
           <option>Flexible — any time that suits</option>
-          <option>Just after a quote</option>
+          <option>Free quote only</option>
         </select></div>
       <div class="field"><label for="b-date">Preferred date</label><input id="b-date" name="date" type="date" data-min-today></div>
       <div class="field"><label for="b-time">Preferred time</label>
         <select id="b-time" name="time">
           <option value="">Any time</option>
           <option>Morning (8am – 12pm)</option>
-          <option>Afternoon (12pm – 5pm)</option>
+          <option>Afternoon (12pm onwards)</option>
         </select></div>
     </div>
     <div class="field"><label for="b-details">Describe the problem <b>*</b></label>
       <textarea id="b-details" name="details" rows="5" required placeholder="e.g. Kitchen tap has been dripping for a week and the cupboard underneath is damp."></textarea></div>
     <div class="field">
       <label for="b-photo">Add a photo <span class="muted">(optional — helps us quote accurately)</span></label>
-      <label class="file" for="b-photo">${icon('camera')}<span data-file-label>Choose a photo</span></label>
+      <label class="file" for="b-photo">${icon("camera")}<span data-file-label>Choose a photo</span></label>
       <input id="b-photo" name="photo" type="file" accept="image/*" class="sr-only">
     </div>
   </fieldset>
 
   ${honeypot}
-  ${consent('b-consent')}
+  ${consent("b-consent")}
   ${turnstile}
   <div class="form-msg" role="alert" aria-live="polite" data-form-msg></div>
   <div class="form-actions">
-    <button class="btn btn-primary btn-lg" type="submit">${icon('send')}<span>Send booking request</span></button>
+    <button class="btn btn-primary btn-lg" type="submit">${icon("send")}<span>Send booking request</span></button>
     <button class="btn btn-wa btn-lg" type="button" data-send-wa>${waIcon()}<span>Send via WhatsApp instead</span></button>
   </div>
-  <p class="form-note">${icon('info')}We'll confirm your booking during opening hours (${SITE.hoursText}). For urgent leaks, please call or WhatsApp.</p>
+  <p class="form-note">${icon("info")}We'll confirm your booking during opening hours (${SITE.hoursText}). For urgent leaks, please call or WhatsApp.</p>
 </form>`;
 }
 
-export function callbackForm({ title = 'Request a call back', sub = 'Leave your number and we\'ll call you back during opening hours.', dark = false } = {}) {
+export function callbackForm({
+  title = "Request a call back",
+  sub = "Leave your number and we'll call you back during opening hours.",
+  dark = false,
+} = {}) {
   return `
-<form class="form form-compact card${dark ? ' card-dark' : ''}" data-form="callback" novalidate>
+<form class="form form-compact card${dark ? " card-dark" : ""}" data-form="callback" novalidate>
   <input type="hidden" name="form" value="callback">
   <h3>${title}</h3>
   <p class="muted">${sub}</p>
-  <div class="field"><label for="c-name-${dark ? 'd' : 'l'}">Name <b>*</b></label><input id="c-name-${dark ? 'd' : 'l'}" name="name" type="text" autocomplete="name" required></div>
-  <div class="field"><label for="c-phone-${dark ? 'd' : 'l'}">Phone <b>*</b></label><input id="c-phone-${dark ? 'd' : 'l'}" name="phone" type="tel" autocomplete="tel" required></div>
-  <div class="field"><label for="c-service-${dark ? 'd' : 'l'}">What do you need?</label>
-    <select id="c-service-${dark ? 'd' : 'l'}" name="service"><option value="">Choose a service…</option>${serviceOptions()}</select></div>
+  <div class="field"><label for="c-name-${dark ? "d" : "l"}">Name <b>*</b></label><input id="c-name-${dark ? "d" : "l"}" name="name" type="text" autocomplete="name" required></div>
+  <div class="field"><label for="c-phone-${dark ? "d" : "l"}">Phone <b>*</b></label><input id="c-phone-${dark ? "d" : "l"}" name="phone" type="tel" autocomplete="tel" required></div>
+  <div class="field"><label for="c-service-${dark ? "d" : "l"}">What do you need?</label>
+    <select id="c-service-${dark ? "d" : "l"}" name="service"><option value="">Choose a service…</option>${serviceOptions()}</select></div>
   ${honeypot}
-  ${consent(`c-consent-${dark ? 'd' : 'l'}`)}
+  ${consent(`c-consent-${dark ? "d" : "l"}`)}
   ${turnstile}
   <div class="form-msg" role="alert" aria-live="polite" data-form-msg></div>
-  <button class="btn btn-primary btn-block" type="submit">${icon('phone')}<span>Call me back</span></button>
+  <button class="btn btn-primary btn-block" type="submit">${icon("phone")}<span>Call me back</span></button>
 </form>`;
 }

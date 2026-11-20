@@ -6,7 +6,10 @@
   "description": "PlumbingBase — plumbers in Crawley. Static site + Vercel booking function.",
   "scripts": {
     "build": "node build.mjs",
-    "dev": "node build.mjs && npx vercel dev"
+    "dev": "node build.mjs && node dev-server.mjs",
+    "dev:vercel": "node build.mjs && npx vercel dev"
   },
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=18"
+  }
 }
