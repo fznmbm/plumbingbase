@@ -310,7 +310,7 @@ export function faqList(faqs) {
 
 export const ctaBand = (
   h = "Need a plumber in Crawley?",
-  p = "Send us a WhatsApp, give us a call or book online — we'll get back to you quickly with a time that suits you.",
+  p = "Get a free quote by WhatsApp, phone or online. No call-out charge — just a fair price, agreed before we start.",
 ) => `
 <section class="cta-band">
   <div class="wrap cta-in">
